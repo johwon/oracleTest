@@ -106,17 +106,18 @@ select department_id, first_name, salary from employees
 where salary > (select avg(salary) from employees where department_id=(select department_id from employees where first_name='Valli'));
 
 --과제 1
-select salary from employees where last_name = 'Tucker';
+--select salary from employees where last_name = 'Tucker';
 select last_name, first_name as Name, job_id, salary from employees 
 where salary > (select salary from employees where last_name = 'Tucker');
 
 --과제2
+select job_id, min(salary) from employees group by job_id;
+--in에 두개 대입
 select last_name, first_name as Name, job_id, salary, hire_date from employees
 where (job_id,salary) in(select job_id, min(salary) from employees group by job_id);
-
+--별칭 지정 
 select last_name, first_name as Name, job_id, salary, hire_date from employees e2
-where salary in(select min(salary) from employees where job_id = e2.job_id);
-
+where salary =(select min(salary) from employees where job_id = e2.job_id);
 
 --job_id별 최소 salary
 select min(salary),job_id from employees group by job_id;
@@ -125,7 +126,7 @@ select min(salary),job_id from employees group by job_id;
 select avg(salary) from employees group by department_id;
 
 select last_name, first_name as Name, salary, department_id, job_id from employees e2
-where salary > (select avg(salary) from employees where department_id = e2.department_id);
+where salary > (select avg(salary)from employees where department_id = e2.department_id);
 
 select department_id, avg(salary) from employees group by department_id;
 
