@@ -66,17 +66,18 @@ START WITH 1
 INCREMENT BY 1;
 
 -- TRAINEE 수강신청
+drop table trainee;
 create table trainee( 
     no number ,                     --pk seq
-    sd_num varchar2(8) not null,    --FK(STUDENT) 학생번호
+    s_num varchar2(8) not null,    --FK(STUDENT) 학생번호
     abbre varchar2(2) not null,     --FK(LESSON) 과목별칭
     section varchar2(20) not null,  --전공,부전공,교양
-    tdate date default sysdate    --수강신청일
+    registdate date default sysdate    --수강신청일
 );
 
 ALTER TABLE trainee ADD CONSTRAINTS trainee_NO_PK PRIMARY KEY(NO);
 ALTER TABLE trainee ADD CONSTRAINTS trainee_student_NUM_FK
-    FOREIGN KEY(sd_num) REFERENCES student(NUM) ON DELETE SET NULL;
+    FOREIGN KEY(s_num) REFERENCES student(NUM) ON DELETE SET NULL;
 ALTER TABLE trainee ADD CONSTRAINTS trainee_lesson_abbre_FK
     FOREIGN KEY(abbre) REFERENCES lesson(abbre) ON DELETE SET NULL;
 
