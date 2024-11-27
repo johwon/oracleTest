@@ -25,7 +25,7 @@ create table student(
     name varchar2(12) not null,     --이름
     id varchar2(12) not null,       --아이디
     passwd varchar2(12) not null,   --패스워드
-    s_num varchar2(2) not null,     --학과번호(fk)
+    s_num varchar2(2),     --학과번호(fk)
     birthday varchar2(8) not null,  --생년월일
     phone varchar2(15) not null,    --전화번호
     address varchar2(80) not null,  --주소
@@ -42,7 +42,8 @@ ALTER TABLE STUDENT DROP CONSTRAINTS STUDENT_SUBJECT_NUM_FK;
 
 SELECT * FROM STUDENT;
 INSERT INTO STUDENT VALUES(STUDENT_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE);
-
+--학생검색
+SELECT NUM, NAME, EMAIL FROM STUDENT WHERE NAME = 'KDJ';
 CREATE SEQUENCE STUDENT_SEQ
 START WITH 1
 INCREMENT BY 1;
@@ -69,10 +70,10 @@ INCREMENT BY 1;
 drop table trainee;
 create table trainee( 
     no number ,                     --pk seq
-    s_num varchar2(8) not null,    --FK(STUDENT) 학생번호
-    abbre varchar2(2) not null,     --FK(LESSON) 과목별칭
+    s_num varchar2(8),              --FK(STUDENT) 학생번호
+    abbre varchar2(2),              --FK(LESSON) 과목별칭
     section varchar2(20) not null,  --전공,부전공,교양
-    registdate date default sysdate    --수강신청일
+    regdate date default sysdate    --수강신청일
 );
 
 ALTER TABLE trainee ADD CONSTRAINTS trainee_NO_PK PRIMARY KEY(NO);
@@ -81,8 +82,19 @@ ALTER TABLE trainee ADD CONSTRAINTS trainee_student_NUM_FK
 ALTER TABLE trainee ADD CONSTRAINTS trainee_lesson_abbre_FK
     FOREIGN KEY(abbre) REFERENCES lesson(abbre) ON DELETE SET NULL;
 
-    
+SELECT LPAD(COUNT(*)+1,4,'0') AS TOTAL_COUNT FROM STUDENT WHERE S_NUM = 1;
 
 create sequence trainee_seq 
 start with 1
 increment by 1;
+
+SELECT * FROM TRAINEE;
+
+--테스팅
+UPDATE TRAINEE SET S_NUM = '', ABBRE = '', SECTION = '' WHERE NO = 10;
+INSERT INTO TRAINEE VALUES(TRAINEE_SEQ.NEXTVAL, '', '', '', SYSDATE);
+
+select T.NO, T.SECTION, T.REGDATE, S.NUM, S.NAME , L.ABBRE, L.NAME AS abbreName
+from trainee T inner join student S on T.s_num = S.num 
+inner join lesson L on T.abbre = L.abbre
+order by T.NO;
