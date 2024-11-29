@@ -35,9 +35,40 @@ public static void main(String[] args){
 }
 ```
 
-# 하이퍼링크(Hyperlink)
-kh홈페이지 <https://kh-academy.co.kr/main/main.kh>
+# 6. 하이퍼링크(Hyperlink)
+1. kh홈페이지 <https://kh-academy.co.kr/main/main.kh>
+2. [kh홈페이지](https://kh-academy.co.kr/main/main.kh)
 
+# 7. 이미지
+첫번째 방법 : ![프로젝트이미지](/oracleTest/경로)
+___
+두번째 방법 : <img src="" width="100px" height="100px">
 
+# 8. 인용상자
+> 인용문을 사용하고 싶을 때
+
+# 9. 강조 기능
+*강조문장입니다.*
+_강조문장입니다._
+**두번강조문장입니다.**
+___
+중간에 글자도 **강조**됩니다
+
+# 테이블
+헤더1|헤더2
+-----|-----
+메뉴 | 불고기
+메뉴2 | 떡볶이
+
+# 체크박스
+# 탈출 문자
+\*강조문자가아님\*
+*강조문자*
+
+# 이모지
+💟
+🖤
+: 쓰고 검색
+🎱
 
 
