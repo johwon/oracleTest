@@ -42,4 +42,34 @@ SELECT PWD FROM ACCOUNT WHERE ID = 'AAA';
 INSERT INTO ACCOUNT VALUES((select NVL(max(no),0)+1 from ACCOUNT),1,2,3,SYSDATE);
 commit;
 
+------------------------------------------
+-- jsp 회원가입 테이블
+CREATE TABLE SIGNUP (
+    ID VARCHAR2(12) ,                         -- 아이디 (4~12자의 영문 대소문자와 숫자)
+    PWD VARCHAR2(12) NOT NULL,                -- 비밀번호 (4~12자의 영문 대소문자와 숫자)
+    EMAIL VARCHAR2(100) NOT NULL,             -- 이메일 주소
+    NAME VARCHAR2(50) NOT NULL,               -- 이름
+    BIRTH NUMBER(10)                          -- 생년월일 (20001010)
+);
 
+ALTER TABLE SIGNUP ADD CONSTRAINT SIGNUP_ID_PK PRIMARY KEY(ID);
+
+SELECT * FROM SIGNUP;
+
+-- jsp로그인테이블
+CREATE TABLE LOGIN2(
+    ID VARCHAR2(12),
+    PWD VARCHAR2(12) NOT NULL
+);
+ALTER TABLE LOGIN2 ADD CONSTRAINT LOGIN2_ID_PK PRIMARY KEY(ID);
+
+DROP TABLE LOGIN2;
+
+--김동욱 login 테이블
+CREATE table LOGIN2 (
+    ID         VARCHAR2(30) not null,
+    PASS      VARCHAR2(30) NOT NULL,
+    name varchar2(30) not null
+);
+alter table login2 add constraint login2_id_pk primary key(id);
+select * from login2;
